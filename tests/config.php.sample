@@ -1,0 +1,8 @@
+<?php
+return array(
+    'mongo' => array(
+        'dbname'    => 'test',
+        'host'      => 'mongo',
+        'port'      => 27017,
+    ),
+);
