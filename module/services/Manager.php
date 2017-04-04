@@ -42,7 +42,7 @@ class Manager implements InjectionAwareInterface
      * @param string $identifier
      * @param string $url
      */
-    public function update($name, $identifier, $url)
+    public function update($name, $identifier, $url, $priority=10)
     {
         $dao = $this->getRouteDao();
 
@@ -62,6 +62,7 @@ class Manager implements InjectionAwareInterface
         $routeModel->name = $name;
         $routeModel->identifier = (string) $identifier;
         $routeModel->url = $url;
+        $routeModel->priority = $priority;
 
         $routeModel->save();
 

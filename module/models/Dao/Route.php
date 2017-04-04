@@ -15,6 +15,9 @@ class Route extends DefaultDao
         return RouteModel::findFirst([
             'conditions' => [
                 'url' => $url
+            ],
+            'sort' => [
+                'priority' => -1
             ]
         ]);
     }
@@ -30,6 +33,9 @@ class Route extends DefaultDao
             'conditions' => [
                 'name' => $name,
                 'identifier' => $identifier
+            ],
+            'sort' => [
+                'priority' => -1
             ]
         ]);
     }
