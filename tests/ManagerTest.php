@@ -55,4 +55,30 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $testRoute = $routeManager->findByUrl('/test');
         $this->assertEquals($testRoute->getIdentifier(), 2);
     }
+
+    public function testDeleteByName()
+    {
+        $routeManager = $this->getRouteManager();
+
+        $testRoute = $routeManager->findByUrl('/test');
+        $this->assertEquals($testRoute->getIdentifier(), 2);
+
+        $routeManager->deleteByName('test');
+
+        $testRoute = $routeManager->findByUrl('/test');
+        $this->assertEquals($testRoute, null);
+    }
+
+    public function testPrioritySort()
+    {
+        $routeManager = $this->getRouteManager();
+        $routeManager->deleteByName('prio');
+
+        $routeManager->update('prio', 1, '/prio', 10);
+        sleep(1);
+        $routeManager->update('prio', 2, '/prio', 10);
+
+        $testRoute = $routeManager->findByUrl('/prio');
+        $this->assertEquals($testRoute->getIdentifier(), 2);
+    }
 }
