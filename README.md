@@ -1,4 +1,19 @@
 Vegas CMF Database router
 ======================
 
-Read the docs at [http://vegas-cmf.github.io/1.0/guide.html](http://vegas-cmf.github.io/1.0/guide.html)
+INSTALL/RUN OLD-SCHOOL
+--
+```
+cp ./tests/config.php.sample ./tests/config.php
+composer install
+php ./vendor/bin/phpunit -c tests/phpunit.xml
+```
+
+INSTALL/RUN DOCKER
+--
+```
+cp ./tests/config.php.sample ./tests/config.php
+yake composer install
+yake up
+yake phpunit -c tests/phpunit.xml
+```

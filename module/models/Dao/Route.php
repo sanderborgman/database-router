@@ -17,7 +17,8 @@ class Route extends DefaultDao
                 'url' => $url
             ],
             'sort' => [
-                'priority' => -1
+                'priority' => -1,
+                'created_at' => -1
             ]
         ]);
     }
@@ -35,7 +36,8 @@ class Route extends DefaultDao
                 'identifier' => $identifier
             ],
             'sort' => [
-                'priority' => -1
+                'priority' => -1,
+                'created_at' => -1
             ]
         ]);
     }
