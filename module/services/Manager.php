@@ -41,6 +41,8 @@ class Manager implements InjectionAwareInterface
      * @param string $name
      * @param string $identifier
      * @param string $url
+     * @param int $priority
+     * @return Route
      */
     public function update($name, $identifier, $url, $priority=10)
     {
@@ -68,6 +70,23 @@ class Manager implements InjectionAwareInterface
         $routeModel->save();
 
         return $routeModel;
+    }
+
+    /**
+     * @param string $name
+     * @param string $identifier
+     */
+    public function delete($name, $identifier)
+    {
+        /** @var \DatabaseRouter\Models\Dao\Route $dao */
+        $dao = $this->getRouteDao();
+        $routeModel = $dao->findByNameAndIdentifier((string) $name, (string) $identifier);
+
+        if ( ! $routeModel) {
+            return;
+        }
+
+        $routeModel->delete();
     }
 
     public function deleteByName($name)

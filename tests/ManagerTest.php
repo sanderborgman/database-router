@@ -56,6 +56,19 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($testRoute->getIdentifier(), 2);
     }
 
+    public function testPrioritySort()
+    {
+        $routeManager = $this->getRouteManager();
+        $routeManager->deleteByName('prio');
+
+        $routeManager->update('prio', 1, '/prio', 10);
+        sleep(1);
+        $routeManager->update('prio', 2, '/prio', 10);
+
+        $testRoute = $routeManager->findByUrl('/prio');
+        $this->assertEquals($testRoute->getIdentifier(), 2);
+    }
+
     public function testDeleteByName()
     {
         $routeManager = $this->getRouteManager();
@@ -69,16 +82,19 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($testRoute, null);
     }
 
-    public function testPrioritySort()
+    public function testDelete()
     {
         $routeManager = $this->getRouteManager();
-        $routeManager->deleteByName('prio');
 
-        $routeManager->update('prio', 1, '/prio', 10);
-        sleep(1);
-        $routeManager->update('prio', 2, '/prio', 10);
+        $routeManager->update('test', 1, '/test-1', 1);
+        $routeManager->update('test', 3, '/test-3', 1);
 
-        $testRoute = $routeManager->findByUrl('/prio');
-        $this->assertEquals($testRoute->getIdentifier(), 2);
+        $testRoute = $routeManager->findByUrl('/test-1');
+        $this->assertEquals($testRoute->getIdentifier(), 1);
+
+        $routeManager->delete('test', 1);
+
+        $testRoute = $routeManager->findByUrl('/test-1');
+        $this->assertEquals($testRoute, null);
     }
 }
